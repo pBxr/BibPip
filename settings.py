@@ -109,7 +109,7 @@ class ttwSettings:
                                   '... with entries in kwMISC',
                                   '... newly added_kwLOC',
                                   '... newly added_kwMISC',
-                                  '(found after translation, if selected)',#NEW
+                                  '(found after translation, if selected)',
                                   ]
         #Set default translation parameters
         self.sourceLanguages = ['de', 'fr', 'es', 'it']
