@@ -72,7 +72,7 @@ def apply_input_filters(inputData, settings):
 def call_gazetteer(result):
 
     gazetteerResult = []
-    check = False
+    res = False
     
     #Prepare call
     result = urllib.parse.quote_plus(result, safe='/:?=&')
@@ -80,32 +80,31 @@ def call_gazetteer(result):
     try:
         toSearch = "https://gazetteer.dainst.org/search.json?q=" + result
         response = requests.get(toSearch)
-        
         resultListComplete = response.json()
         resultList = resultListComplete['result']
         
         gazetterHits = len(resultList)
 
         gazetteerResult.append(f"Searching {result} in gazetteer: {gazetterHits} hit(s)\n")
- 
+        #print(f"Searching {result} in gazetteer: {gazetterHits} hit(s)\n")
+        
+        #Ensure that the hits only result from relevant fields
         for item in resultList:
-            if item['prefName']['title']:
-                check = result in item['prefName']['title']
-                gazetteerResult.append(f"{result} in {item['prefName']['title']}: " + str(check) + "\n")
+            if item['prefName']['title'] and res is False:
+                res = result in item['prefName']['title']
+                gazetteerResult.append(f"{result} in {item['prefName']['title']}: " + str(res) + "\n")
+                #print(f"prefName: {result} in {item['prefName']['title']}: " + str(res) + "\n")
                 
             if 'names' in item:
                 for name in item['names']:
-                    if name['title']:
-                        check = result in name['title']
-                        gazetteerResult.append(f"{result} in {name['title']}: " + str(check) + "\n")
+                    if name['title'] and res is False:
+                        res = result in name['title']
+                        gazetteerResult.append(f"{result} in {name['title']}: " + str(res) + "\n")
+                        #print(f"names: {result} in {name['title']}: " + str(res) + "\n")
+            
     except:
         gazeteerResult = ''
-
-    if len(gazetteerResult) > 1:
-        res = True
-    else:
-        res = False
-
+    
     #GazetteerResult will not be recorded in this version
        
     return res
@@ -305,7 +304,7 @@ def filter_other_results(settings, logGenerator, row, inputData):
 
 def run_NER(settings):
     print("\nStarting NER: ", settings.fileNameForNER)
-    
+        
     logGenerator = bf.log_NER_Class(settings)
     logGenerator.add_to_log(f"File: {settings.fileNameForNER}\n\n")
     
