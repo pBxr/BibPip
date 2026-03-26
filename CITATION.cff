@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Baumeister"
     given-names: "Peter"
-    orcid: "https://orcid.org/0000-0001-5430-1456 "
+    orcid: "https://orcid.org/0000-0001-5430-1456"
 title: "BibPip. Test pipeline for Named Entity Recognition in bibliographical entries"
 version: 1.0.0
 identifiers:
