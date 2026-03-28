@@ -43,6 +43,14 @@ The file `Koha_Test_Data.csv` contains a few entries and can be used for testing
 
 ### The main scripts 
 
+First, set up your environment and install all dependiences: 
+
+```python
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 See the comments in the main file (`BibPip.py`) on how to initialize BibPip and how to run the scripts below.
 
 1.) Prepare the source `.csv` file (`prepare_Koha_Export.py`):
