@@ -1,0 +1,8 @@
+pandas
+langdetect
+numpy
+transformers
+torch
+sentencepiece
+requests
+unidecode
